@@ -5,10 +5,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .weather img {
-  display: none;
+  margin-top: -9rem;
 }
 
 .weather-app {
@@ -21,6 +24,7 @@
   align-items: center;
   padding: 2rem;
   box-shadow: -3rem 1rem 6rem rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
 .search {
@@ -81,12 +85,9 @@
   cursor: pointer;
 }
 
-.weather-app {
-  position: relative;
-}
 .weather-type {
   position: absolute;
-  top: 8%;
+  top: 48%;
   left: 50%;
   transform: translateX(-50%);
   font-size: 2rem;
@@ -144,7 +145,4 @@
 .data {
   font-size: 2rem;
   color: #2f2e57;
-}
-.weather img {
-  margin-top: -9rem;
 }

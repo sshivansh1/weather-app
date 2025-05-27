@@ -5,7 +5,6 @@ import snowy from "../assets/images/snowy.png"
 import loading from "../assets/images/loading.gif"
 import { useState, useEffect } from "react"
 
-
 const WeatherApp = () => {
     const [data, setData] = useState({})
     const [location, setLocation] = useState('')
@@ -44,10 +43,31 @@ const WeatherApp = () => {
             search()
     }
 
+    const weatherImages = {
+        Clear: sunny,
+        Clouds: cloudy,
+        Rain: rainy,
+        Snow: snowy,
+        Haze: cloudy,
+        Mist: cloudy,
+    }
+
+    const weatherImage = data.weather ? weatherImages[data.weather[0].main]: null
+
+    const backgroundImages = {
+         Clear: "linear-gradient(to top right, #87CEEB, #FFE57F)",     // Sunny with a warm glow
+        Clouds: "linear-gradient(to top right, #B0C4DE, #D6EAF8)",    // Soft, layered clouds
+        Rain: "linear-gradient(to bottom, #5F9EA0, #2F4F4F)",         // Moody rainy atmosphere
+        Snow: "linear-gradient(to top, #E0F7FA, #FFFFFF)",            // Icy fresh snow
+        Haze: "linear-gradient(to bottom, #D3D3D3, #A9A9A9)",         // Dense hazy look
+        Mist: "linear-gradient(to bottom, #C0C0C0, #E0E0E0)",         // Foggy and soft
+    };
+
+    const backgroundImage = data.weather ? backgroundImages[data.weather[0].main] : 'linear-gradient(to right, #f3b07c, #fcd2a3)';
     return(
         //  The main app container where all our weather UI will live.
-        <div className="container"> 
-            <div className="weather-app">
+        <div className="container" style = {{backgroundImage}}>
+            <div className="weather-app" style={{backgroundImage: backgroundImage && backgroundImage.replace ? backgroundImage.replace('to top right', 'to top left'): null}}>
                 <div className="search">
                     <div className="search-top">
                         <i className="fa-solid fa-location-dot"></i>
@@ -63,7 +83,7 @@ const WeatherApp = () => {
                 </div>
 
                 <div className="weather">
-                    <img src={sunny} alt="sunny"/>
+                    <img src={weatherImage} alt="weather"/>
                     <div className="weather-type">{data.weather ? data.weather[0].main: null}</div>
                     <div className="temp">{data.main ? `${Math.floor(data.main.temp)}°C`: null}</div>
                 </div>
